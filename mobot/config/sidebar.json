@@ -1,0 +1,10 @@
+{
+  "/mobot/": [
+    {
+      "text": "MoBot Documentation",
+      "items": [
+        { "text": "Getting Started", "link": "/mobot" }
+      ]
+    }
+  ]
+}

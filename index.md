@@ -3,23 +3,26 @@
 layout: home
 
 hero:
-  name: "pixeldocs"
-  text: "Documentation for the PixelServices projects"
-  tagline: My great project tagline
+  name: "Pixel Services Documentation"
+  text: ""
+  tagline: "Explore the documentation for all public Pixel Services projects"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Support Us
+      link: https://buymeacoffee.com/pixelservices
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Check out our Github
+      link: https://github.com/Pixel-Services
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Flash
+    details: Simple, modern and fast expressive web framework written in Java.
+    link: /flash
+  - title: ServerLibraries
+    details: A Library made to ease server-side Fabric mod development.
+    link: /serverlibraries
+  - title: MoBot
+    details: A Modular Discord Bot with a simple but efficent API.
+    link: /mobot
 ---
 

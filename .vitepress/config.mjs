@@ -1,28 +1,9 @@
-import { defineConfig } from 'vitepress'
+import sidebarConfig from '../composer.js'
 
-// https://vitepress.dev/reference/site-config
-export default defineConfig({
-  title: "pixeldocs",
-  description: "Documentation for the PixelServices projects",
-  themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
-  }
-})
+export default {
+    themeConfig: {
+        siteTitle: 'Pixel Services Docs',
+        logo: 'https://static.pixel-services.com/static/assets/pservices_logo.png',
+        sidebar: sidebarConfig
+    }
+}

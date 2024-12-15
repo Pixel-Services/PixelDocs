@@ -1,0 +1,10 @@
+{
+  "/serverlibraries/": [
+    {
+      "text": "ServerLibraries Documentation",
+      "items": [
+        { "text": "Getting Started", "link": "/serverlibraries" }
+      ]
+    }
+  ]
+}

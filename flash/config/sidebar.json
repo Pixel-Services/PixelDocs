@@ -1,0 +1,10 @@
+{
+  "/flash/": [
+    {
+      "text": "Flash Documentation",
+      "items": [
+        { "text": "Getting Started", "link": "/flash" }
+      ]
+    }
+  ]
+}
