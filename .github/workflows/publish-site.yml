@@ -30,3 +30,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: build
           publish_dir: .vitepress/dist
+          keep_files: true
