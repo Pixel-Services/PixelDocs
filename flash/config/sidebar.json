@@ -3,7 +3,9 @@
     {
       "text": "Flash Documentation",
       "items": [
-        { "text": "Getting Started", "link": "/flash" }
+        { "text": "Getting Started", "link": "/flash" },
+        { "text": "Installation", "link": "/flash/installation" },
+        { "text": "Server Types", "link": "/flash/server-types" }
       ]
     }
   ]
