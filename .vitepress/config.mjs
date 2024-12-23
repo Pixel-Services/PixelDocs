@@ -2,7 +2,6 @@ import { sidebarConfig, pageMetadata } from '../scripts/composer.js';
 
 export default {
     title: 'Pixel Services Docs',
-    description: 'Documentation for all public Pixel Services projects.',
     siteTitle: 'Documentation for all public Pixel Services projects.',
 
     head: [
