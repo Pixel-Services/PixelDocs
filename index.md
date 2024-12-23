@@ -2,10 +2,6 @@
 banner_title: "Pixel Services Documentation"
 banner_description: "Explore the documentation for all public Pixel Services projects"
 
-head:
-  - - meta
-    - name: "twitter:description"
-
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
