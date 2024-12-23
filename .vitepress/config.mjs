@@ -24,8 +24,9 @@ export default {
             ['meta', { name: 'twitter:image', content: localImageUrl }],
             ['meta', { name: 'twitter:image:src', content: absoluteImageUrl }],
             ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-            ['meta', { name: 'twitter:image:height', content: 1280 }],
-            ['meta', { name: 'twitter:image:width', content: 669 }]
+            ['meta', { name: 'twitter:image:height', content: "1280" }],
+            ['meta', { name: 'twitter:image:width', content: "669" }],
+            ['meta', { name: 'twitter:description', content: "" }],
         );
     },
 };
