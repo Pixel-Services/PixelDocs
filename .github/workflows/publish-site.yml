@@ -24,6 +24,9 @@ jobs:
       - name: Build documentation
         run: npm run docs:build
 
+      - name: Run post build script
+        run: npm run postbuild
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

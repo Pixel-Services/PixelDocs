@@ -11,6 +11,11 @@
     "build:all": "npm run build:base && npm run build:flash && npm run build:mobot",
     "build:base": "vitepress build base",
     "build:flash": "vitepress build flash",
-    "build:mobot": "vitepress build mobot"
+    "build:mobot": "vitepress build mobot",
+    "postbuild": "node ./scripts/postbuild.cjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "twitter-card-image": "^1.0.9"
   }
 }
