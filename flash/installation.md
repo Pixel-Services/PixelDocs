@@ -1,3 +1,8 @@
+---
+banner_title: "Flash - Installation"
+banner_description: "A guide on how to install the Flash library in your project."
+---
+
 <script setup>
 import { ref, onMounted } from 'vue';
 

@@ -1,3 +1,8 @@
+---
+banner_title: "Flash - Server Types Guide"
+banner_description: "Illustrating the main differences between the internal server instance and the FlashServer instance."
+---
+
 # Server Types
 
 In this section, we discuss the differences between the internal server instance `InternalFlashServer` and the `FlashServer` instance, and whether you should use one or the other. We will also provide examples of how to use each type of server.

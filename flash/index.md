@@ -2,6 +2,9 @@
 next:
    text: 'Installation'
    link: '/flash/installation'
+   
+banner_title: "Flash - A Modern Web Framework"
+banner_description: "Flash is a fast and expressive web framework written in Java."
 ---
 
 # ⚡ Flash
