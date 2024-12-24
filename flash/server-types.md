@@ -1,5 +1,5 @@
 ---
-banner_title: "Flash - Server Types Guide"
+banner_title: "Flash - Server Types"
 banner_description: "Illustrating the main differences between the internal server instance and the FlashServer instance."
 ---
 
@@ -82,7 +82,9 @@ This means:
 
 Both the `InternalFlashServer` and any user-created `FlashServer` instances are of the same type (`FlashServer`). However, if you want to create and manage your own server instance, you must provide a **name** during initialization, e.g.:
 
+```java
 FlashServer server = new FlashServer("My Server Instance");
+```
 
 ## Which Server Type Should You Use?
 
@@ -91,6 +93,7 @@ If you only need one server instance and want to keep your code concise, you can
 However, if your application needs to handle multiple server instances each with different ports and configurations,
 you should use `FlashServer` instances.
 
-Example use cases for each server type:
-- Internal Server: Simple Backend for a webapp.
-- Server Instance: Applications where flexible deployment and scalability are required.
+::: warning
+From now on, and unless otherwise specified, every example in the documentation will use the `InternalFlashServer` to illustrate the usage of the library.
+However, for your specific implementation, you can call the same methods on your `FlashServer` instance to achieve the same results.
+:::
