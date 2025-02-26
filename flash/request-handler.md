@@ -11,19 +11,14 @@ In this section, we illustrate the powerful concept of `RequestHandler` in Flash
 
 To create a custom request handler, you need to extend the `RequestHandler` class and annotate the class with the `RouteInfo` annotation,
 specifying the HTTP method that the handler will respond to and the relative path that the handler will be registered to.
-The `enforceNonNullBody` attribute is used to specify whether the handler expects a non-null request body: by default, it is set to `false`.
 After that, you must override the `handle` method;
 The `handle` method is where you define the logic for processing the request and generating the response.
 The `req` (request) and `res` (response) objects are available in the handler to access the request data and send the response back to the client.
 
 You must call the super constructor with the `req` and `res` objects to initialize the handler.
 
-```java{5,8}
-import flash.Request;
-import flash.Response;
-import flash.RequestHandler;
-
-@RouteInfo(method = HttpMethod.GET, path = "/hello", enforceNonNullBody = false)
+```java{1,4}
+@RouteInfo(method = HttpMethod.GET, path = "/hello")
 public class MyHandler extends RequestHandler {
     public MyHandler(Request req, Response res) {
         super(req, res);

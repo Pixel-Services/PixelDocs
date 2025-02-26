@@ -50,13 +50,8 @@ The `ExpectedRequestParameter`, `ExpectedBodyField`, and `ExpectedBodyFile` inst
   The `ExpectedRequestParameter` object is used to get the expected parameters of the request.
   You can use the getter methods to safely get the parameter value, such as `getString`, `getInt`, `getDouble`, and `getBoolean` methods to safely cast the parameter to the expected type.
 
-```java{8,11,16}
-import flash.Request;
-import flash.Response;
-import flash.models.RequestHandler;
-import flash.models.ExpectedRequestParameter;
-
-@RouteInfo(method = HttpMethod.GET, path = "/hello", enforceNonNullBody = false)
+```java{4,8,18,21}
+@RouteInfo(method = HttpMethod.GET, path = "/hello")
 public class MyHandler extends RequestHandler {
     // Store the expected parameter in a private field
     private final ExpectedRequestParameter myExpectedReqParam;
@@ -89,14 +84,8 @@ Visiting `/hello?myParam=John` from your browser, will return `Hello, John!`.
   The `ExpectedBodyField` object is used to get the expected fields of the request body.
   You can use the getter methods to safely get the field value, such as `getString`, `getInt`, `getDouble`, and `getBoolean` methods to safely cast the field to the expected type.
 
-```java{8,11,16}
-import flash.Request;
-import flash.Response;
-import flash.models.RequestHandler;
-import flash.models.ExpectedBodyField;
-
-// Make sure to set enforceNonNullBody to true
-@RouteInfo(method = HttpMethod.GET, path = "/helloBody", enforceNonNullBody = true)
+```java{4,8,18,21}
+@RouteInfo(method = HttpMethod.GET, path = "/helloBody")
 public class MyHandler extends RequestHandler {
     // Store the expected field in a private field
     private final ExpectedBodyField myExpectedBodyField;
@@ -134,14 +123,8 @@ The methods provided by this object are slightly different from the other two, b
 - `getFileName()` simply returns the name of the file specified by the client.
 - `getInputStream()` returns an `InputStream` object containing the file's contents.
 
-```java{8,11,16}
-import flash.Request;
-import flash.Response;
-import flash.models.RequestHandler;
-import flash.models.ExpectedBodyFile;
-
-// Make sure to set enforceNonNullBody to true
-@RouteInfo(method = HttpMethod.POST, path = "/helloFile", enforceNonNullBody = true)
+```java{4,8,18,21}
+@RouteInfo(method = HttpMethod.POST, path = "/helloFile")
 public class MyHandler extends RequestHandler {
     // Store the expected file in a private field
     private final ExpectedBodyFile myExpectedBodyFile;

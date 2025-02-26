@@ -71,7 +71,7 @@ This page provides installation instructions for the latest version of the `flas
 
 <div>
    ⚡ Latest version:
-   <a href="'https://maven.pixel-services.com/#/releases/com/pixelservices/flash'" style="text-decoration: underline; color: #007bff;">
+   <a href="https://maven.pixel-services.com/#/releases/com/pixelservices/flash" style="text-decoration: underline; color: #007bff;">
       <strong>{{ latestVersion }}</strong>
    </a>
 </div>
