@@ -13,7 +13,7 @@ corresponding file from the server. This is where a dynamic file server comes in
 
 ::: warning
 The dynamic file server relies heavily on the concept of dynamic handlers, which are handlers that will resolve for
-any subpath of the endpoint they are registered to (see [Handler Types](/flash/dynamic-handlers) for more info).
+any subpath of the endpoint they are registered to (see [Handler Types](/flash/handlers) for more info).
 :::
 
 ## Usage
@@ -70,19 +70,4 @@ public class Example {
     }
 }
 ```
-
-## 💻 Note on Fullstack Development
-
-![flash-fullstack.png](assets/flash-fullstack.png)
-
-The dynamic file server opens up the possibility for fullstack development with Flash.
-You can easily serve your frontend application alongside your backend, and build the entire application in a single jarfile.
-
-This is possible thanks to the `RESOURCESTREAM` source type, which allows you to serve files from the jar's resources folder:
-the ideal cycle for packaging your app would be to compile the frontend application and place the compiled files in the resources folder (or setup the build script to do it for you),
-then build the jarfile with the compiled frontend and the backend code.
-
-This approach works for any frontend framework that can compile down to static files (React, Angular, Vue, etc.).
-
-For more in-depth information on how to build a fullstack application with Flash, check out the [Fullstack Development](/flash/fullstack-development) guide.
 

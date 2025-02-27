@@ -1,18 +1,38 @@
 {
   "/flash/": [
     {
-      "text": "Flash Documentation",
+      "text": "Introduction",
+      "collapsed": false,
       "items": [
         { "text": "Getting Started", "link": "/flash" },
-        { "text": "Installation", "link": "/flash/installation" },
-        { "text": "Handlers", "link": "/flash/handlers" },
-        { "text": "RequestHandler", "link": "/flash/request-handler"},
-        { "text": "Request and Response", "link": "/flash/request-response"},
-        { "text": "Server Router", "link": "/flash/server-router" },
-        { "text":  "Handler Default Implementations", "link": "/flash/handler-default-implementations" },
-        { "text":  "Websockets", "link": "/flash/websockets" },
-        { "text":  "Static Files Server", "link": "/flash/static-file-server" },
-        { "text":  "Dynamic Files Server", "link": "/flash/dynamic-file-server" }
+        { "text": "Installation", "link": "/flash/introduction/installation" }
+      ]
+    },
+    {
+      "text": "Core Concepts",
+      "collapsed": false,
+      "items": [
+        { "text": "Handlers", "link": "/flash/core-concepts/handlers" },
+        { "text": "RequestHandler", "link": "/flash/core-concepts/request-handler" },
+        { "text": "Request and Response", "link": "/flash/core-concepts/request-response" },
+        { "text": "Server Router", "link": "/flash/core-concepts/server-router" },
+        { "text": "Websockets", "link": "/flash/core-concepts/websockets" }
+      ]
+    },
+    {
+      "text": "File Serving",
+      "collapsed": false,
+      "items": [
+        { "text": "Static Files Server", "link": "/flash/file-serving/static-file-server" },
+        { "text": "Dynamic Files Server", "link": "/flash/file-serving/dynamic-file-server" }
+      ]
+    },
+    {
+      "text": "Advanced",
+      "collapsed": false,
+      "items": [
+        { "text": "Handler Default Implementations", "link": "/flash/advanced/handler-default-implementations" },
+        { "text": "Fullstack Development", "link": "/flash/advanced/fullstack-development" }
       ]
     }
   ]
