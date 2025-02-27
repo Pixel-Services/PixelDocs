@@ -13,7 +13,7 @@ corresponding file from the server. This is where a dynamic file server comes in
 
 ::: warning
 The dynamic file server relies heavily on the concept of dynamic handlers, which are handlers that will resolve for
-any subpath of the endpoint they are registered to (see [Handler Types](/flash/handlers) for more info).
+any subpath of the endpoint they are registered to (see [Handler Types](/flash/core-concepts/handlers) for more info).
 :::
 
 ## Usage
