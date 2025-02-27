@@ -6,10 +6,26 @@ const makeCard = require('twitter-card-image');
 const projects = ['flash', 'mobot', 'serverlibraries'];
 const baseDir = path.resolve(__dirname, './');
 const outputImageDir = path.resolve(__dirname, '../.vitepress/dist/assets/banner-cards/');
+const excludedFolders = ['assets', 'config', 'vitepress'];
 
 if (!fs.existsSync(outputImageDir)) {
     fs.mkdirSync(outputImageDir, { recursive: true });
 }
+
+const getMarkdownFiles = (dir) => {
+    let results = [];
+    const list = fs.readdirSync(dir);
+    list.forEach((file) => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat && stat.isDirectory() && !excludedFolders.includes(file)) {
+            results = results.concat(getMarkdownFiles(filePath));
+        } else if (file.endsWith('.md')) {
+            results.push(filePath);
+        }
+    });
+    return results;
+};
 
 const generateBannerCard = async (filePath, outputPath) => {
     try {
@@ -73,7 +89,7 @@ const generateIndexImage = async () => {
 const generateImagesForProjects = async () => {
     await generateIndexImage();
 
-    //handle all projects
+    // Handle all projects
     for (const project of projects) {
         const projectPath = path.join(baseDir, "../" + project);
 
@@ -82,10 +98,10 @@ const generateImagesForProjects = async () => {
             continue;
         }
 
-        const files = fs.readdirSync(projectPath).filter((file) => file.endsWith('.md'));
-        for (const file of files) {
-            const filePath = path.join(projectPath, file);
-            const fileName = `${project}-${file.replace('.md', '')}.png`;
+        const files = getMarkdownFiles(projectPath);
+        for (const filePath of files) {
+            const relativePath = path.relative(projectPath, filePath);
+            const fileName = `${project}-${relativePath.replace(/[/\\]/g, '-')}.png`;
             const outputImagePath = path.join(outputImageDir, fileName);
             console.log(`Generating: ${fileName}`);
             await generateBannerCard(filePath, outputImagePath);

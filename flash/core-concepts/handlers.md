@@ -29,7 +29,9 @@ You can extend the `RequestHandler` class to create custom handlers that process
 Because `RequestHandler` is an abstract class, you need to implement both the `handle()` method and the `super` constructor in your custom handler to define the logic that should be executed
 when a request is received.
 
-Since `RequestHandler` is an abstract class, you can leverage and chain HDI's to create cleaner and more maintainable route logic (more on that in the [Handler Default Implementations](/flash/advanced/handler-default-implementations) section).
+Since `RequestHandler` is an abstract class, you can leverage and chain HDI's to create cleaner and more maintainable route logic (more on that in the Handler Default Implementations guide).
+
+```java[Example]
 
 ### 2. SimpleHandler
 
