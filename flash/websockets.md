@@ -18,6 +18,8 @@ you would need to poll the server at regular intervals to check for updates, whi
 ## Creating a Websocket
 
 To create a Websocket in Flash, you need to extend the `WebsocketHandler` class and override the `onOpen`, `onMessage`, `onClose`, and `onError` methods.
+These methods are called when the Websocket connection is opened, a message is received, the connection is closed, and an error occurs, respectively,
+and they provide you with an instance of the `WebSocketSession` object to be able to interact with it.
 
 ```java
 public class MyWebsocketHandler extends WebsocketHandler {
@@ -34,6 +36,8 @@ public class MyWebsocketHandler extends WebsocketHandler {
     @Override
     public void onMessage(WebSocketSession session, String message) {
         System.out.println("Received message: " + message);
+
+        //optionally send a reponse back to the client
         session.sendMessage("I received your message!");
     }
 
@@ -52,7 +56,7 @@ public class Example {
         FlashServer server = new FlashServer(8080);
 
         server.ws("/ws")
-            .register(MyWebsocketHandler.class);
+            .register(new MyWebsocketHandler());
 
         server.start();
     }
@@ -62,3 +66,20 @@ public class Example {
 ## Interacting with Websockets sessions
 
 The `WebSocketSession` object provides methods to interact with the Websocket session, such as sending messages, closing the connection, and getting the remote address and session ID.
+
+| Method             | Params           | Description                                                                                                                                      |
+|--------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `getChannel()`     | `none`           | Returns an instance of `AsynchronousSocketChannel` useful for retrieving info about the client   .                                               |
+| `getRequestInfo()` | `none`           | Returns an instance of `RequestInfo` containing all sorts of information about the request (headers, method, path etc.) .                        |
+| `getPath()`        | `none`           | Returns the path to the websocket endpoint as a `String`.                                                                                        |
+| `getId()`          | `none`           | Returns the id of the websocket session as a `String`, useful if you want to keep track of the connected clients in a custom manager.            |
+| `getBuffer()`      | `none`           | Returns the ByteBuffer for that session.                                                                                                         |
+| `sendMessage()`    | `String message` | Sends the `message` to the client as a `String`. it's up to the developer to stringify and de-stringify any data you want to send back and forth |
+| `close()`          | `none`           | Closes the websocket session.                                                                                                                    |
+
+::: warning NOTE
+`WebsocketHandler` includes a `setId(String id)` method for overriding the default session ID. Unless you have a specific reason to change it, it's best to leave it as is.
+
+Similarly, the `setBuffer(ByteBuffer buffer)` method allows you to override the default buffer. If you're unsure about this, it's recommended to keep the default setting.
+:::
+
