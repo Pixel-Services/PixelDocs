@@ -101,7 +101,7 @@ const generateImagesForProjects = async () => {
         const files = getMarkdownFiles(projectPath);
         for (const filePath of files) {
             const relativePath = path.relative(projectPath, filePath);
-            const fileName = `${project}-${relativePath.replace(/[/\\]/g, '-')}.png`;
+            let fileName = `${project}-${relativePath.replace(/[/\\]/g, '-').replace('.md', '')}.png`;
             const outputImagePath = path.join(outputImageDir, fileName);
             console.log(`Generating: ${fileName}`);
             await generateBannerCard(filePath, outputImagePath);
