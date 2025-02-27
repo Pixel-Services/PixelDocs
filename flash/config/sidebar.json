@@ -5,12 +5,14 @@
       "items": [
         { "text": "Getting Started", "link": "/flash" },
         { "text": "Installation", "link": "/flash/installation" },
+        { "text": "Handlers", "link": "/flash/handlers" },
         { "text": "RequestHandler", "link": "/flash/request-handler"},
         { "text": "Request and Response", "link": "/flash/request-response"},
         { "text": "Server Router", "link": "/flash/server-router" },
         { "text":  "Handler Default Implementations", "link": "/flash/handler-default-implementations" },
         { "text":  "Websockets", "link": "/flash/websockets" },
-        { "text":  "Static Files Server", "link": "/flash/static-file-server" }
+        { "text":  "Static Files Server", "link": "/flash/static-file-server" },
+        { "text":  "Dynamic Files Server", "link": "/flash/dynamic-file-server" }
       ]
     }
   ]

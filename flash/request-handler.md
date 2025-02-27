@@ -6,6 +6,7 @@ banner_description: "Learn how to create and manage Request Handlers in Flash."
 # ⚙️ Request Handler
 
 In this section, we illustrate the powerful concept of `RequestHandler` in Flash, which are used to handle incoming requests and generate responses.
+RequestHandler classes provide the most control over the request lifecycle and allow you to use routing, expected operators and HDI's to create custom logic for handling requests.
 
 ## Creating a Request Handler
 
@@ -18,7 +19,7 @@ The `req` (request) and `res` (response) objects are available in the handler to
 You must call the super constructor with the `req` and `res` objects to initialize the handler.
 
 ```java{1,4}
-@RouteInfo(method = HttpMethod.GET, path = "/hello")
+@RouteInfo(endpoint="/hello", method = HttpMethod.GET)
 public class MyHandler extends RequestHandler {
     public MyHandler(Request req, Response res) {
         super(req, res);

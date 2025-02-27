@@ -30,6 +30,7 @@ public abstract class APIKeyProtectedHandler extends RequestHandler {
 
         if (apiKey == null || !isValidApiKey(apiKey)) {
             res.status(403);
+            res.type("application/json");
             return "{\"error\":\"Invalid API Key\"}";
         }
 
@@ -58,6 +59,7 @@ public class GetDataHandler extends APIKeyProtectedHandler {
 
     @Override
     protected Object handleAuthorized() {
+        res.type("application/json");
         return "{\"data\":\"Your API response here\"}";
     }
 }
@@ -109,6 +111,7 @@ public abstract class AuthenticatedHandler extends ProtectedHandler {
         user = getUserFromDatabase(authToken);
         if (user == null) {
             res.status(403);
+            res.type("application/json");
             return "{\"error\":\"User not found\"}";
         }
         return handleWithUser();
@@ -132,6 +135,7 @@ public class UserProfileHandler extends AuthenticatedHandler {
 
     @Override
     protected Object handleWithUser() {
+        res.type("application/json");
         return "{\"username\":\"" + username + "\"}";
     }
 }

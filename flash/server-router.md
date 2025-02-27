@@ -16,7 +16,7 @@ To access the router instance, you can call the `route()` method on the `FlashSe
 To create a route, you need to call the `route()` method on your server's instance (in this case for simplicity, on the InternalFlashServer)
 and specify the base path of the route, followed by your handler class,
 
-```java{9}
+```java{6}
 // Example.java
 public class Example {
     public static void main(String[] args) {
@@ -30,11 +30,8 @@ public class Example {
 }
 ```
 
-```java{6}
+```java{3}
 // MyHandler.java
-import flash.Request;
-import flash.Response;
-import flash.models.RequestHandler;
 
 @RouteInfo(method = HttpMethod.GET, path = "/hello")
 public class MyHandler extends RequestHandler {
@@ -50,8 +47,8 @@ public class MyHandler extends RequestHandler {
 }
 ```
 
-In the example above, we create a route `/api` and register the `MyHandler` class to handle requests on the `/api/hello` endpoint.
+In the example above, we create an `/api` router and register the `MyHandler` class to handle requests on the `/api/hello` endpoint.
 
-This is because the `path` property of the `RouteInfo` annotation is relative to the base path of the route, which in this case is `/api`.
+This is because the `path` property of the `RouteInfo` annotation is relative to the base path of the router, which in this case is `/api`.
 
 Visiting `/api/hello` from your browser will result in the response `Hello, world!`.
