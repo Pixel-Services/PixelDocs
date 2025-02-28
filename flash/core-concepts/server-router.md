@@ -13,7 +13,7 @@ To access the router instance, you can call the `route()` method on the `FlashSe
 
 ## Creating a Route
 
-To create a route, you need to call the `route()` method on your server's instance (in this case for simplicity, on the InternalFlashServer)
+To create a route, you need to call the `route()` method on your server's instance
 and specify the base path of the route, followed by your handler class,
 
 ```java{6}

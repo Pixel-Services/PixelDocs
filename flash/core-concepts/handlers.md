@@ -31,8 +31,6 @@ when a request is received.
 
 Since `RequestHandler` is an abstract class, you can leverage and chain HDI's to create cleaner and more maintainable route logic (more on that in the Handler Default Implementations guide).
 
-```java[Example]
-
 ### 2. SimpleHandler
 
 The `SimpleHandler` is a lightweight handler that allows you to define request handling logic in a single method using lambda notation.
