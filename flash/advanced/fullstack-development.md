@@ -3,7 +3,7 @@ banner_title: "Flash - Fullstack Development"
 banner_description: "Build fullstack apps with Flash, frontend and backend in one jar."
 ---
 
-# 🌐 Fullstack Development with Flash
+# 🌐 Fullstack Development
 
 Fullstack development involves building both the **front-end** (user interface) and **back-end** (server logic, database) of a web application. A fullstack developer is responsible for the entire application, ensuring a smooth connection between the two layers.
 
@@ -17,7 +17,7 @@ Popular fullstack frameworks include:
 Developing and packaging a fullstack application can be complex, but **Flash** simplifies the process with built-in tools and **quality-of-life features**. With Flash, you can:
 - Serve both **frontend** and **backend** from a single application.
 - Bundle everything into a **single JAR file** for easy deployment.
-- Leverage HDIs for **clean, modular and maintainable route logic**.
+- Leverage HDI's for **clean, modular and maintainable route logic**.
 
 ![Flash Fullstack Development](../assets/flash-fullstack.png)
 
@@ -45,11 +45,11 @@ This guide will cover only some of the most popular javascript frontend build to
 ### 🛠️ Setting up the Frontend Build Process
 
 :::warning
-When building a frontend application with a javascript framework that will be served from a subdirectory (e.g., `/app`), you need to specify the homepage in the `package.json` file. This ensures that the frontend assets are correctly loaded from the subdirectory.
-Using a subdirectory and forgetting to set the homepage will result in broken asset links and a potentially non-functional frontend.
+When building a frontend application with a javascript framework that will be served on a subpath (e.g., `/app`), you need to specify the homepage in the `package.json` file. This ensures that the frontend assets are correctly loaded from the subpath.
+Using a subpath and forgetting to set the homepage will result in broken asset links and a potentially non-functional frontend.
 ```json
 {
-    "homepage": "/your-subdirectory"
+    "homepage": "/your-subpath"
 }
 ```
 :::
@@ -92,7 +92,7 @@ Using a subdirectory and forgetting to set the homepage will result in broken as
 Once you have compiled the frontend assets and placed them in the `resources/frontend` folder, you can serve them using Flash's dynamic file server. This server will serve the frontend assets from the JAR's resources folder.
 ::: info
 NOTE: The following example is assuming you plan to serve the frontend from the root path (`/`).
-If you plan to serve the frontend from a subdirectory (e.g., `/app`), you will need to adjust the endpoint path accordingly by adding a trailing `/*`.
+If you plan to serve the frontend from a subpath (e.g., `/app`), you will need to adjust the endpoint path accordingly by adding a trailing `/*`.
 :::
 
 ```java
