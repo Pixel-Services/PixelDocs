@@ -33,7 +33,7 @@ public class Example {
 ```java{3}
 // MyHandler.java
 
-@RouteInfo(method = HttpMethod.GET, path = "/hello")
+@RouteInfo(endpoint = "/hello", method = HttpMethod.GET)
 public class MyHandler extends RequestHandler {
     public MyHandler(Request req, Response res) {
         super(req, res);

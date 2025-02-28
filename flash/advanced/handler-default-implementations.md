@@ -120,7 +120,7 @@ public abstract class APIKeyProtectedHandler extends RequestHandler {
 Now, your API handler implementation only need to extend APIKeyProtectedHandler, ensuring every request has a valid API key before executing its logic:
 
 ```java
-@RouteInfo(method = HttpMethod.GET, path = "/data")
+@RouteInfo(endpoint = "/data", method = HttpMethod.GET)
 public class GetDataHandler extends APIKeyProtectedHandler {
     public GetDataHandler(Request req, Response res) {
         super(req, res);

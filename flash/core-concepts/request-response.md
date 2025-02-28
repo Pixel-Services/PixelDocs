@@ -51,7 +51,7 @@ The `ExpectedRequestParameter`, `ExpectedBodyField`, and `ExpectedBodyFile` inst
   You can use the getter methods to safely get the parameter value, such as `getString`, `getInt`, `getDouble`, and `getBoolean` methods to safely cast the parameter to the expected type.
 
 ```java{4,8,18,21}
-@RouteInfo(method = HttpMethod.GET, path = "/hello")
+@RouteInfo(endpoint = "/hello", method = HttpMethod.GET)
 public class MyHandler extends RequestHandler {
     // Store the expected parameter in a private field
     private final ExpectedRequestParameter myExpectedReqParam;
@@ -85,7 +85,7 @@ Visiting `/hello?myParam=John` from your browser, will return `Hello, John!`.
   You can use the getter methods to safely get the field value, such as `getString`, `getInt`, `getDouble`, and `getBoolean` methods to safely cast the field to the expected type.
 
 ```java{4,8,18,21}
-@RouteInfo(method = HttpMethod.GET, path = "/helloBody")
+@RouteInfo(endpoint = "/helloBody", method = HttpMethod.GET)
 public class MyHandler extends RequestHandler {
     // Store the expected field in a private field
     private final ExpectedBodyField myExpectedBodyField;
@@ -124,7 +124,7 @@ The methods provided by this object are slightly different from the other two, b
 - `getInputStream()` returns an `InputStream` object containing the file's contents.
 
 ```java{4,8,18,21}
-@RouteInfo(method = HttpMethod.POST, path = "/helloFile")
+@RouteInfo(endpoint = "/helloFile", method = HttpMethod.POST)
 public class MyHandler extends RequestHandler {
     // Store the expected file in a private field
     private final ExpectedBodyFile myExpectedBodyFile;
