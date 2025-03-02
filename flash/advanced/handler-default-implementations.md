@@ -5,87 +5,96 @@ banner_description: "Leverage HDIs for cleaner and more maintainable route logic
 
 # ⚡ Handler Default Implementations (HDI)
 
-Handler Default Implementations (HDIs) provide an elegant way to standardize common behaviors across multiple request handlers. By defining base handlers that extend `RequestHandler` (or chaining multiple base handlers together), you can modularize logic for common tasks like authentication, user data retrieval, and rate limiting.
+Handler Default Implementations (HDIs) offer a streamlined approach to standardize common behaviors across request handlers in Flash.
+By extending a base `RequestHandler` (or chaining multiple base handlers), you can centralize tasks like authentication, user data retrieval,
+and rate limiting while keeping your code modular and maintainable.
 
-HDIs are designed using the [Chain of Responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern), making it easy to handle requests with layered logic.
+HDIs use the [Chain of Responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) to layer reusable logic,
+ensuring that shared functionality is defined once and inherited by all handlers.
 
-## 🔗 How It Works
+![HDI](../assets/hdi.png)
 
-Instead of repeating the same logic in each handler, create abstract handler classes that define common functionality. Your handler implementations then extend these base classes, inheriting the shared behavior while implementing the request-specific logic.
+## 🔗 How HDIs Work
 
-### Semantics of an HDI
+Rather than repeating common logic across different handlers, HDIs allow you to create **abstract base handlers** that encapsulate shared behaviors. When your individual request handlers extend these bases, they automatically inherit predefined functionality, and you only need to implement request-specific logic.
 
-Creating an HDI is simple, but it's useful to follow some guidelines for clarity and maintainability:
+### Key Benefits
 
-1. ### **Base HDI Class**:
-    - **Extends**: The base HDI class should extend `RequestHandler`.
-    - **Constructor**: The constructor must call the super constructor with `Request` and `Response` objects.
-    - **Override**: Override the `handle` method to include common behavior.
-      The `handle` method should return the response to the client and should call the _Abstract Handler Method_, which is implemented by the handler or next HDI in the chain.
-      ```java
-      @Override
-      public Object handle() {
-          // Common logic here, then call the abstract method
-          return handleCustom();
-      }
-      ```
-    - **Abstract Handler Method**: Define an abstract method that must be implemented by the handler to provide custom logic. It should look like this:
-      ```java
-      protected abstract Object handleCustom();
-      ```
-    - **Protected Fields**: If needed, declare protected fields in the base class to pass data between handlers in the chain.
-      ::: info
-      Protected fields are accessible to the handler implementation inside the Abstract Handler Method.
-      Example HDI :
-         ```java
-         public abstract class MyHDI extends RequestHandler {
-             protected String data; 
-             public BaseHandler(Request req, Response res) {
-                 super(req, res);
-             }
-             @Override
-             public Object handle() {
-                 data = "Some data"; // Set the data
-                 return handleCustom();
-             }
-             protected abstract Object handleCustom();
-         }
-         ```
+- **Build-Time Optimization:**  
+  When your project is compiled, Flash’s router merges the entire HDI chain into a single handler instance.
+  This eliminates extra function calls and runtime lookups, resulting in a leaner execution path compared to traditional middleware stacks.
 
-      Example Handler Implementation :
+- **Reduced Complexity:**  
+  Unlike frameworks that rely on reflection (e.g., Spring Boot) or a deep middleware stack (e.g., Express.js),
+  HDIs embed inherited behavior directly in the compiled class, minimizing runtime overhead.
 
-         ```java
-         public class MyHandler extends MyHDI {
-             public MyHandler(Request req, Response res) {
-                 super(req, res);
-             }
-             @Override
-             protected Object handleCustom() {
-                 // The data is accessible here
-                 System.out.println(data);
-                 return "Response";
-             }
-         }
-         ```
-      :::
+- **Type Safety & Clean State Management:**  
+  Protected fields in HDIs allow seamless data sharing between handlers without using global variables, callbacks, or type casting.
+  Note: Always declare these fields as instance (non-static) variables to ensure each handler maintains its own state.
 
-2. ### **Handler Implementation**:
-    - **Extends**: The handler should extend the HDI class (or be the final handler in the chain).
-    - **Constructor**: The constructor should call the super constructor with `Request` and `Response` objects.
-    - **Implement**: Implement the **Abstract Handler Method** from the HDI.
-    - **Response Logic**: The response logic should be in the abstract method, and its return value is sent to the client.
-      ```java
-      @Override
-      protected Object handleCustom() {
-            // Custom logic here
-            return "Response";
-      }
-      ```
-    - **Protected Fields**: The handler implementation can access data from the HDI using the protected fields, **inside** the Abstract Handler Method.
+## 🛡️ HDI Design Guidelines
 
-### 🛠 Example: API Key Authentication
+### 1. Base HDI Class
 
-Now let's go over a simple example to demonstrate how HDIs work. Imagine you need to authenticate API requests by checking an API key. You can create an abstract `APIKeyProtectedHandler` that extends `RequestHandler` and handles the API key authentication:
+Define an abstract base class that extends `RequestHandler` to encapsulate common logic:
+
+- **Constructor:**  
+  Initialize by passing `Request` and `Response` objects to the superclass.
+
+- **Overridden `handle` Method:**  
+  Implement common logic and delegate to an abstract method for custom behavior.
+
+  ```java
+  @Override
+  public Object handle() {
+      // Insert common logic here (e.g., logging, header processing)
+      return handleCustom();
+  }
+  ```
+
+- **Abstract Method:**  
+  Declare an abstract method that must be implemented by subclasses.
+
+  ```java
+  protected abstract Object handleCustom();
+  ```
+
+- **Protected Fields:**  
+  Use protected instance fields to share data between HDI layers.
+
+  > **Warning:** Do **not** declare these fields as static. Each handler should manage its own state.
+  >
+  > ```java
+  > // Incorrect: static field
+  > protected static String data;
+  > 
+  > // Correct: instance field
+  > protected String data;
+  > ```
+
+### 2. Concrete Handler Implementation
+
+Extend the base HDI class in your handler:
+
+- **Constructor:**  
+  Call the super constructor with the necessary `Request` and `Response` objects.
+
+- **Implement `handleCustom()`:**  
+  Write the request-specific logic here. Protected fields from the base class are available within this method.
+
+  ```java
+  @Override
+  protected Object handleCustom() {
+      // Custom logic using inherited data
+      return "Response";
+  }
+  ```
+
+## 🛠️ Example: API Key Authentication
+
+This example demonstrates how to build an HDI that validates an API key before processing a request.
+
+### Abstract API Key Protected Handler
 
 ```java
 public abstract class APIKeyProtectedHandler extends RequestHandler {
@@ -98,26 +107,26 @@ public abstract class APIKeyProtectedHandler extends RequestHandler {
     @Override
     public Object handle() {
         apiKey = req.header("X-API-Key");
-
         if (apiKey == null || !isValidApiKey(apiKey)) {
             res.status(403);
             res.type("application/json");
             return "{\"error\":\"Invalid API Key\"}";
         }
-
         return handleAuthorized();
     }
 
     protected abstract Object handleAuthorized();
 
     private boolean isValidApiKey(String key) {
-        // Implement key validation logic, e.g., checking against a database
+        // Implement your API key validation logic here
         return true;
     }
 }
 ```
 
-Now, your API handler implementation only need to extend APIKeyProtectedHandler, ensuring every request has a valid API key before executing its logic:
+### Concrete API Handler
+
+Extend the abstract handler to process the request only if the API key is valid:
 
 ```java
 @RouteInfo(endpoint = "/data", method = HttpMethod.GET)
@@ -136,11 +145,9 @@ public class GetDataHandler extends APIKeyProtectedHandler {
 
 ## 🏗️ Chaining HDIs for Modular Logic
 
-![HDI Chain](../assets/hdichain.png)
+HDIs can be layered to build complex flows. For instance, you might first authenticate a request, then fetch user data.
 
-HDIs can be chained together to create multiple layers of logic. For example, if you need to authenticate a user and fetch their data from a database, you can create two HDIs:
-
-- `ProtectedHandler` ensures authentication.
+### Protected Handler (Authentication)
 
 ```java
 public abstract class ProtectedHandler extends RequestHandler {
@@ -162,15 +169,21 @@ public abstract class ProtectedHandler extends RequestHandler {
     }
 
     protected abstract Object handleAuthenticated();
+
+    private boolean isValidToken(String token) {
+        // Validate the token here
+        return true;
+    }
 }
 ```
 
-- `AuthenticatedHandler` extends ProtectedHandler to fetch user data from the database, and overrides `handleAuthenticated` to ensure the user is authenticated before proceeding.
+### Authenticated Handler (User Data Retrieval)
+
+Extend the `ProtectedHandler` to fetch user details:
 
 ```java
 public abstract class AuthenticatedHandler extends ProtectedHandler {
     protected User user;
-    private String authToken; // inherited from ProtectedHandler
 
     public AuthenticatedHandler(Request req, Response res) {
         super(req, res);
@@ -191,7 +204,9 @@ public abstract class AuthenticatedHandler extends ProtectedHandler {
 }
 ```
 
-- Your handler implementation `UserProfileHandler` extends `AuthenticatedHandler` and implements `handleWithUser` to ensure the user is authenticated and their profile data has been fetched before proceeding.
+### Final Handler Implementation
+
+Implement the final handler that uses the authenticated user data:
 
 ```java
 @RouteInfo(endpoint = "/profile", method = HttpMethod.GET)
@@ -207,3 +222,9 @@ public class UserProfileHandler extends AuthenticatedHandler {
     }
 }
 ```
+
+---
+
+For reference, here's a visual representation of how an HDI chain operates: <br>
+
+![HDI Chain](../assets/hdichain.png)
