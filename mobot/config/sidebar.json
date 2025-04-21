@@ -1,9 +1,42 @@
 {
   "/mobot/": [
     {
-      "text": "MoBot Documentation",
+      "text": "Introduction",
       "items": [
-        { "text": "Getting Started", "link": "/mobot" }
+        { "text": "Installation", "link": "/mobot/introduction/installation" }
+      ]
+    },
+    {
+      "text": "Creating a Module",
+      "collapsed": false,
+      "items": [
+        { "text": "Getting Started", "link": "/mobot/creating-a-module/modules-introduction" },
+        { "text": "Module Lifecycle", "link": "/mobot/creating-a-module/module-lifecycle" }
+      ]
+    },
+    {
+      "text": "Commands",
+      "collapsed": false,
+        "items": [
+          { "text": "Creating a Command", "link": "/mobot/commands/creating-a-command" },
+          { "text": "Command Arguments", "link": "/mobot/commands/command-arguments" }
+        ]
+    },
+    {
+      "text": "Events",
+      "collapsed": false,
+      "items": [
+        { "text": "What are Events?", "link": "/mobot/events/events-introduction" },
+        { "text": "Creating a Listener", "link": "/mobot/events/creating-a-listener" }
+      ]
+    },
+    {
+      "text": "Configs",
+      "collapsed": false,
+      "items": [
+        { "text": "Default Config", "link": "/mobot/configuration/default-config" },
+        { "text": "Custom Configs", "link": "/mobot/configuration/custom-configs" },
+        { "text": "Non Yaml Configs", "link": "/mobot/configuration/non-yaml-configs" }
       ]
     }
   ]

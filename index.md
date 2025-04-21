@@ -25,7 +25,7 @@ features:
     details: A Library made to ease server-side Fabric mod development.
     link: /serverlibraries
   - title: MoBot
-    details: A Modular Discord Bot with a simple but efficent API.
+    details: A modular Discord bot written in Java, with a feature-rich API.
     link: /mobot
 ---
 
